@@ -33,6 +33,18 @@ const EditorBottomNavigationBar: React.FC<IProps> = ({size, imageData, totalImag
         );
     };
 
+    function backImage(event:KeyboardEvent){
+        if(event.key === 'a' || event.key === 'A'){
+            ImageActions.getPreviousImage();
+        }
+    }
+
+    function nextImage(event:KeyboardEvent){
+        if(event.key === 'd' || event.key === 'D'){
+            ImageActions.getNextImage();
+        }
+    }
+
     return (
         <div className={getClassName()}>
             <ImageButton
@@ -40,6 +52,7 @@ const EditorBottomNavigationBar: React.FC<IProps> = ({size, imageData, totalImag
                 imageAlt={"previous"}
                 buttonSize={{width: 25, height: 25}}
                 onClick={() => ImageActions.getPreviousImage()}
+                onKeyDown={backImage}
                 isDisabled={activeImageIndex === 0}
                 externalClassName={"left"}
             />
@@ -52,6 +65,7 @@ const EditorBottomNavigationBar: React.FC<IProps> = ({size, imageData, totalImag
                 imageAlt={"next"}
                 buttonSize={{width: 25, height: 25}}
                 onClick={() => ImageActions.getNextImage()}
+                onKeyDown={nextImage}
                 isDisabled={activeImageIndex === totalImageCount - 1}
                 externalClassName={"right"}
             />
