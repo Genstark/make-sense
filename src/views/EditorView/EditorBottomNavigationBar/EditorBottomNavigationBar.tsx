@@ -22,9 +22,9 @@ const EditorBottomNavigationBar: React.FC<IProps> = ({size, imageData, totalImag
 
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
-            if (event.key === 'a' && activeImageIndex > 0) {
+            if (event.key === 'a' || event.key === 'A' && activeImageIndex > 0) {
                 ImageActions.getPreviousImage();
-            } else if (event.key === 'd' && activeImageIndex < totalImageCount - 1) {
+            } else if (event.key === 'd'|| event.key === 'D' && activeImageIndex < totalImageCount - 1) {
                 ImageActions.getNextImage();
             }
         };
