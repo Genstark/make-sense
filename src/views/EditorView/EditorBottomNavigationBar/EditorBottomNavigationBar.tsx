@@ -20,6 +20,8 @@ interface IProps {
 const EditorBottomNavigationBar: React.FC<IProps> = ({size, imageData, totalImageCount, activeImageIndex, activeContext}) => {
     const minWidth:number = 400;
 
+    // Handle key press events for navigation
+    // 'a' or 'A' for previous image, 'd' or 'D' for next image
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
             if (event.key === 'a' || event.key === 'A' && activeImageIndex > 0) {
