@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './EditorBottomNavigationBar.scss';
 import {ImageData} from "../../../store/labels/types";
 import {AppState} from "../../../store";
@@ -19,6 +19,19 @@ interface IProps {
 
 const EditorBottomNavigationBar: React.FC<IProps> = ({size, imageData, totalImageCount, activeImageIndex, activeContext}) => {
     const minWidth:number = 400;
+
+    useEffect(() => {
+        const handleKeyPress = (event: KeyboardEvent) => {
+            if (event.key === 'a' || event.key === 'A' && activeImageIndex > 0) {
+                ImageActions.getPreviousImage();
+            } else if (event.key === 'd' || event.key === 'D' && activeImageIndex < totalImageCount - 1) {
+                ImageActions.getNextImage();
+            }
+        };
+        window.addEventListener('keypress', handleKeyPress);
+
+        return () => window.removeEventListener('keypress', handleKeyPress);
+    }, [activeImageIndex, totalImageCount]);
 
     const getImageCounter = () => {
         return (activeImageIndex + 1) + " / " + totalImageCount;
